@@ -15,7 +15,7 @@ jobs:
         platform: [ubuntu-22.04]
         deployment: [multi, single]
         authenticate-flow: [stateful, stateless]
-    runs-on: ${{ matrix.platform }}
+    runs-on: "${{ (matrix.platform) == 'ubuntu-22.04' && fromJSON('[\"self-hosted\",\"linux\",\"x64\"]') || (matrix.platform) }}"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
@@ -47,7 +47,7 @@ jobs:
           go test -tags integration -v ./integration/...
 
   e2e:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
@@ -70,7 +70,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-latest, macos-latest]
-    runs-on: ${{ matrix.platform }}
+    runs-on: "${{ (matrix.platform) == 'ubuntu-latest' && fromJSON('[\"self-hosted\",\"linux\",\"x64\"]') || (matrix.platform) == 'macos-latest' && fromJSON('[\"self-hosted\",\"macOS\",\"ARM64\"]') || (matrix.platform) }}"
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
@@ -115,7 +115,7 @@ jobs:
           fail-on-error: false
 
   build-docker:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
 
@@ -132,7 +132,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   precommit:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
@@ -163,7 +163,7 @@ jobs:
           SKIP: lint
 
   check-docker-images:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1

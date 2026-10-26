@@ -9,7 +9,7 @@ on:
 
 jobs:
   backport:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     name: Backport
     steps:
       - name: Generate token

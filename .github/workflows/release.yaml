@@ -20,7 +20,7 @@ jobs:
       contents: write
       issues: read
       pull-requests: read
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     env:
       DOCKER_CLI_EXPERIMENTAL: "enabled"
     outputs:
@@ -145,7 +145,7 @@ jobs:
           docker manifest push pomerium/pomerium:debug-nonroot
 
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     needs: goreleaser
     if: github.event_name == 'release'
     steps:
@@ -169,7 +169,7 @@ jobs:
             Source Repo: ${{ github.repository }}@${{ github.sha }}
 
   tag-sub-packages:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     needs: goreleaser
     if: github.event_name == 'release'
     steps:

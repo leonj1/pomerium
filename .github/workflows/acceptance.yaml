@@ -38,7 +38,7 @@ concurrency:
 jobs:
   browser:
     name: E2E — browser
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
 
     steps:
@@ -115,7 +115,7 @@ jobs:
 
   mcp:
     name: E2E — mcp
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
 
     steps:
@@ -173,7 +173,7 @@ jobs:
 
   downstream-mtls:
     name: E2E — downstream-mtls
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
     # Non-blocking while a CI flake is stabilized: the suite restarts the
     # Pomerium container per spec group, which churns the runner's Docker network
@@ -227,7 +227,7 @@ jobs:
 
   upstream-tls:
     name: E2E — upstream-tls
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     timeout-minutes: 30
 
     steps:
@@ -276,7 +276,7 @@ jobs:
     name: E2E — summary
     needs: [browser, mcp, downstream-mtls, upstream-tls]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
 
     steps:
       - name: Checkout code

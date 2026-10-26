@@ -8,7 +8,7 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     outputs:
       sha-tag: ${{ steps.metadata.outputs.sha-tag }}
 
@@ -136,7 +136,7 @@ jobs:
           docker manifest push pomerium/pomerium:debug-main
 
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: [self-hosted, linux, x64]
     needs: publish
     steps:
       - name: Checkout Gitops Repo

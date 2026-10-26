@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   audit-signatures:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, linux, x64]
     strategy:
       matrix:
         dir: [ui, internal/acceptance/browser, internal/acceptance/ws-server, internal/acceptance/suites]
